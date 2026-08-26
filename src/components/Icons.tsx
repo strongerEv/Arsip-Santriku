@@ -242,3 +242,9 @@ export const IconTrend = (p: IconProps) => (
     <path d="M15.4 6.5H20v4.6" />
   </Base>
 )
+
+export const IconMinus = (p: IconProps) => (
+  <Base {...p} strokeWidth={2}>
+    <path d="M6 12h12" />
+  </Base>
+)

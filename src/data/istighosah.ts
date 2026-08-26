@@ -193,7 +193,7 @@ export const ISTIGHOSAH_ANNAJAH: ReadingPackage = {
       title: 'Dzikir Ismudz-Dzat',
       counted: true,
       target: null,
-      note: 'Dibaca sebanyak-banyaknya — tidak ada target tetap. Tekan "Selesaikan Sesi" bila sudah cukup.',
+      note: 'Dibaca sebanyak-banyaknya — tidak ada target tetap. Tekan tombol "Selesai" bila sudah cukup.',
       arabic: 'اَللهُ اَللهُ اَللهُ',
       latin: 'Allāh, Allāh, Allāh',
       translation: 'Allah, Allah, Allah.',

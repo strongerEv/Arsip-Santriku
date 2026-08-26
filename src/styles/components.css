@@ -255,10 +255,16 @@
   justify-content: center;
   gap: 4px;
   padding: 6px 8px calc(var(--safe-bottom) + 6px);
-  background: color-mix(in srgb, var(--bg-elevated) 82%, transparent);
-  backdrop-filter: saturate(180%) blur(22px);
-  -webkit-backdrop-filter: saturate(180%) blur(22px);
+  background: var(--bg-elevated);
   border-top: 1px solid var(--separator);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .tabbar {
+    background: color-mix(in srgb, var(--bg-elevated) 82%, transparent);
+    backdrop-filter: saturate(180%) blur(22px);
+    -webkit-backdrop-filter: saturate(180%) blur(22px);
+  }
 }
 
 .tabbar__inner {

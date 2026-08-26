@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useLibrary } from '../context/LibraryContext'
 import { useSession } from '../context/SessionContext'
@@ -8,6 +8,7 @@ import { haptic } from '../lib/haptics'
 import { setFocusMode } from '../lib/focusMode'
 import { useWakeLock } from '../lib/useWakeLock'
 import { useShake } from '../lib/useShake'
+import { useRingSize } from '../lib/useRingSize'
 import { formatDuration, formatNumber } from '../lib/format'
 import { ReadingCard } from '../components/ReadingCard'
 import { TasbihRing } from '../components/TasbihRing'
@@ -18,6 +19,7 @@ import {
   IconChevronLeft,
   IconChevronRight,
   IconClose,
+  IconMinus,
   IconRefresh,
 } from '../components/Icons'
 import { EmptyState } from '../components/ui'
@@ -36,6 +38,8 @@ export function SesiPage() {
   const [askExit, setAskExit] = useState(false)
   const [flash, setFlash] = useState(false)
   const advancing = useRef(false)
+  const readingRef = useRef<HTMLDivElement>(null)
+  const ringSize = useRingSize()
 
   const pkg = getPackage(packageId)
   const active = Boolean(pkg) && !summary
@@ -100,6 +104,11 @@ export function SesiPage() {
   }, [addCount])
 
   useShake(active && settings.shakeToCount && Boolean(reading?.counted), onTap)
+
+  // Tiap ganti bacaan, kembalikan gulir ke awal teks.
+  useEffect(() => {
+    readingRef.current?.scrollTo({ top: 0 })
+  }, [reading?.id])
 
   // Pindah otomatis begitu hitungan mencapai target.
   useEffect(() => {
@@ -200,9 +209,12 @@ export function SesiPage() {
 
   const order = session.index + 1
   const canCount = reading.counted
+  // Tinggi dock dipakai sebagai ruang bawah area baca.
+  const dockHeight = canCount ? ringSize + 30 : 68
+  const dockStyle = { '--dock-h': `${dockHeight}px` } as CSSProperties
 
   return (
-    <main className={`session${flash ? ' session--complete-flash' : ''}`}>
+    <main className={`session${flash ? ' session--complete-flash' : ''}`} style={dockStyle}>
       <div className="session__topbar">
         <button
           type="button"
@@ -213,6 +225,16 @@ export function SesiPage() {
           <IconClose />
         </button>
         <span className="session__topbar-title">{pkg.name}</span>
+        <button
+          type="button"
+          className="icon-btn"
+          onClick={() => addCount(-1)}
+          aria-label="Kurangi satu hitungan"
+          disabled={!canCount || session.count === 0}
+          style={{ opacity: canCount && session.count > 0 ? 1 : 0.4 }}
+        >
+          <IconMinus />
+        </button>
         <button
           type="button"
           className="icon-btn"
@@ -238,7 +260,13 @@ export function SesiPage() {
         })}
       </div>
 
-      <div className="session__body">
+      {/* Teks Arab mendapat seluruh tinggi layar; mengetuk di mana saja pada
+          area ini ikut menambah hitungan, jadi bisa membaca sambil menghitung. */}
+      <div
+        ref={readingRef}
+        className={`session__reading${canCount ? ' session__reading--tappable' : ''}`}
+        onClick={canCount ? onTap : undefined}
+      >
         <ReadingCard
           reading={reading}
           order={order}
@@ -247,54 +275,64 @@ export function SesiPage() {
           showTranslation={settings.showTranslation}
           animateKey={reading.id}
         />
-
-        {canCount && (
-          <div className="session__counter-area">
-            <TasbihRing count={session.count} target={reading.target} onTap={onTap} />
-            <p className="session__note">
-              {settings.shakeToCount
-                ? 'Ketuk lingkaran atau goyangkan perangkat untuk menghitung'
-                : 'Ketuk lingkaran untuk menghitung'}
-            </p>
-          </div>
-        )}
       </div>
 
-      <div className="session__controls">
-        <button
-          type="button"
-          className="btn btn--secondary btn--sm"
-          onClick={goPrev}
-          disabled={session.index === 0}
-        >
-          <IconChevronLeft style={{ width: 16, height: 16 }} /> Sebelumnya
-        </button>
+      {/* Petunjuk hilang setelah ketukan pertama agar tidak menutupi teks. */}
+      {canCount && (reached || session.count === 0) && (
+        <p className={`session__hint${reached ? ' session__hint--accent' : ''}`}>
+          <span>
+            {reached
+              ? 'Target tercapai'
+              : settings.shakeToCount
+                ? 'Ketuk teks atau goyangkan perangkat'
+                : 'Ketuk teks atau lingkaran untuk menghitung'}
+          </span>
+        </p>
+      )}
+
+      <div className="session__dock">
+        <span className="session__dock-slot">
+          <button
+            type="button"
+            className="icon-btn"
+            onClick={goPrev}
+            disabled={session.index === 0}
+            aria-label="Bacaan sebelumnya"
+            style={{ opacity: session.index === 0 ? 0.4 : 1 }}
+          >
+            <IconChevronLeft />
+          </button>
+        </span>
 
         {canCount && (
-          <button
-            type="button"
-            className="btn btn--secondary btn--sm"
-            onClick={() => addCount(-1)}
-            disabled={session.count === 0}
-          >
-            Kurangi
-          </button>
+          <TasbihRing
+            count={session.count}
+            target={reading.target}
+            onTap={onTap}
+            size={ringSize}
+          />
         )}
 
-        {reading.target === null && canCount ? (
-          <button type="button" className="btn btn--primary btn--sm" onClick={() => doFinish(true)}>
-            <IconCheckCircle style={{ width: 17, height: 17 }} /> Selesaikan Sesi
-          </button>
-        ) : (
-          <button
-            type="button"
-            className={`btn btn--sm ${reached || !canCount ? 'btn--primary' : 'btn--secondary'}`}
-            onClick={goNext}
-          >
-            {isLast ? 'Selesai' : 'Lanjut'}
-            <IconChevronRight style={{ width: 16, height: 16 }} />
-          </button>
-        )}
+        <span className="session__dock-slot session__dock-slot--kanan">
+          {reading.target === null && canCount ? (
+            <button
+              type="button"
+              className="btn btn--primary btn--sm"
+              onClick={() => doFinish(true)}
+            >
+              <IconCheckCircle style={{ width: 17, height: 17 }} /> Selesai
+            </button>
+          ) : (
+            <button
+              type="button"
+              className={`btn btn--sm ${reached || !canCount ? 'btn--primary' : 'btn--secondary'}`}
+              onClick={goNext}
+            >
+              {isLast ? 'Selesai' : 'Lanjut'}
+              <IconChevronRight style={{ width: 16, height: 16 }} />
+            </button>
+          )}
+        </span>
       </div>
 
       <Sheet

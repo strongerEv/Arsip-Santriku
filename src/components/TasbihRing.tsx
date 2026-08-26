@@ -67,8 +67,13 @@ export function TasbihRing({ count, target, onTap, size = 236, disabled }: Tasbi
         />
       </svg>
       <span className="ring__content">
-        <span className="ring__count">{count}</span>
-        <span className="ring__target">{target ? `dari ${target}` : 'tanpa batas'}</span>
+        {/* Ukuran angka ikut diameter, supaya ring tetap terbaca saat dikecilkan. */}
+        <span className="ring__count" style={{ fontSize: Math.round(size * 0.3) }}>
+          {count}
+        </span>
+        <span className="ring__target" style={{ fontSize: Math.max(10, Math.round(size * 0.062)) }}>
+          {target ? `dari ${target}` : 'tanpa batas'}
+        </span>
         {target && count >= target && <span className="ring__hint">Tercapai</span>}
       </span>
     </button>

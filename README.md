@@ -21,7 +21,8 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 - Tombol tasbih berbentuk **activity ring** (seperti Apple Watch) dengan angka besar di tengah.
 - Hitungan naik tiap ketukan, atau dengan **menggoyangkan perangkat** (opsional, butuh izin sensor gerak).
 - **Auto-pindah** ke bacaan berikutnya saat target tercapai, dengan transisi halus + getar penanda.
-- Target `null` ("sebanyak-banyaknya") tidak auto-pindah — diakhiri lewat tombol **Selesaikan Sesi**.
+- **Tasbih mengambang**: teks Arab memakai seluruh tinggi layar, tasbih menempel di bawah dan selalu terlihat — jadi bisa membaca sambil menghitung tanpa menggulir. Mengetuk di mana saja pada area teks juga menambah hitungan.
+- Target `null` ("sebanyak-banyaknya") tidak auto-pindah — diakhiri lewat tombol **Selesai**.
 - Reset hitungan per bacaan, kurangi hitungan, maju/mundur antar bacaan.
 - **Lanjutkan sesi**: sesi yang ditinggal tersimpan otomatis dan bisa dilanjutkan dari Beranda.
 
@@ -38,7 +39,7 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 - Susun target sholawat sendiri: **berapa jumlahnya** (mis. 10.000) **dalam berapa hari** (mis. 30) — keduanya bebas diatur, lengkap dengan preset cepat.
 - **Target harian dihitung otomatis** dan bisa menyesuaikan sendiri: sisa bacaan dibagi sisa hari, sehingga ketika sempat tertinggal targetnya ikut menyesuaikan.
 - Pilih teks sholawat (Jibril, Pendek, Ibrahimiyah, Nariyah, Munjiyat) atau tulis teks sendiri.
-- Layar baca dengan **tasbih digital** — hitungan langsung tercatat pada tanggal hari ini, dengan getar penanda saat target harian tercapai.
+- Layar baca dengan **tasbih digital mengambang** — teks sholawat tetap terbaca penuh sambil menghitung, hitungan langsung tercatat pada tanggal hari ini, dengan getar penanda saat target harian tercapai.
 - Pantau progres: cincin persentase total, capaian hari ini, hari berjalan, rentetan hari berturut-turut, rata-rata harian, perkiraan tanggal selesai, dan grafik 14 hari terakhir.
 - Program yang diakhiri tersimpan sebagai riwayat.
 

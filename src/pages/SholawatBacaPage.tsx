@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSholawat } from '../context/SholawatContext'
 import { useSession } from '../context/SessionContext'
@@ -10,8 +10,9 @@ import { haptic } from '../lib/haptics'
 import { setFocusMode } from '../lib/focusMode'
 import { useWakeLock } from '../lib/useWakeLock'
 import { useShake } from '../lib/useShake'
+import { useRingSize } from '../lib/useRingSize'
 import { TasbihRing } from '../components/TasbihRing'
-import { IconCheck, IconClose, IconHeart } from '../components/Icons'
+import { IconCheck, IconClose, IconMinus } from '../components/Icons'
 import { EmptyState } from '../components/ui'
 
 /**
@@ -25,6 +26,7 @@ export function SholawatBacaPage() {
   const { settings } = useSettings()
   const [rayakan, setRayakan] = useState(false)
   const sudahTercapai = useRef(false)
+  const ringSize = useRingSize()
 
   const aktif = Boolean(program)
   useWakeLock(aktif && settings.keepAwake)
@@ -78,9 +80,13 @@ export function SholawatBacaPage() {
   const nama =
     program.textId === CUSTOM_TEXT_ID ? (program.customName ?? 'Teks sendiri') : (teks?.name ?? '')
   const targetHariIni = progress.dailyTarget > 0 ? progress.dailyTarget : null
+  const dockStyle = { '--dock-h': `${ringSize + 62}px` } as CSSProperties
 
   return (
-    <main className={`session${rayakan ? ' session--complete-flash' : ''}`}>
+    <main
+      className={`session${rayakan ? ' session--complete-flash' : ''}`}
+      style={dockStyle}
+    >
       <div className="session__topbar">
         <button
           type="button"
@@ -91,15 +97,26 @@ export function SholawatBacaPage() {
           <IconClose />
         </button>
         <span className="session__topbar-title">{nama}</span>
-        <span className="icon-btn" style={{ background: 'transparent', color: 'var(--accent)' }}>
-          <IconHeart />
-        </span>
+        <button
+          type="button"
+          className="icon-btn"
+          onClick={() => addCount(-1)}
+          disabled={progress.today === 0}
+          aria-label="Kurangi satu hitungan"
+          style={{ opacity: progress.today === 0 ? 0.4 : 1 }}
+        >
+          <IconMinus />
+        </button>
       </div>
 
-      <div className="session__body">
+      {/* Mengetuk di mana saja pada teks ikut menghitung, sehingga bisa
+          membaca sholawat sambil menekan tasbih tanpa berpindah pandang. */}
+      <div className="session__reading session__reading--tappable" onClick={onTap}>
         <article className="reading-card reading-card--in">
           <header className="reading-card__head">
-            <span className="reading-card__index">Hari ke-{Math.max(1, Math.min(progress.dayIndex, program.days))}</span>
+            <span className="reading-card__index">
+              Hari ke-{Math.max(1, Math.min(progress.dayIndex, program.days))}
+            </span>
             <span className="reading-card__target">
               {targetHariIni ? `${formatNumber(targetHariIni)}× hari ini` : 'bebas'}
             </span>
@@ -115,29 +132,24 @@ export function SholawatBacaPage() {
             <p className="reading-card__translation">{teks.translation}</p>
           )}
         </article>
-
-        <div className="session__counter-area">
-          <TasbihRing count={progress.today} target={targetHariIni} onTap={onTap} />
-          {rayakan ? (
-            <p className="session__note" style={{ color: 'var(--accent)', fontWeight: 600 }}>
-              <IconCheck style={{ width: 14, height: 14, verticalAlign: '-2px' }} /> Target harian
-              tercapai — silakan lanjut bila masih ingin menambah
-            </p>
-          ) : (
-            <p className="session__note">
-              {settings.shakeToCount
-                ? 'Ketuk lingkaran atau goyangkan perangkat tiap satu sholawat'
-                : 'Ketuk lingkaran tiap satu sholawat'}
-            </p>
-          )}
-        </div>
       </div>
 
-      <div className="stack" style={{ gap: 10, flex: 'none' }}>
-        <div>
-          <div className="row" style={{ fontSize: 12.5, color: 'var(--text-tertiary)', marginBottom: 6 }}>
+      {(rayakan || progress.today === 0) && (
+        <p className={`session__hint${rayakan ? ' session__hint--accent' : ''}`}>
+          <span>
+            {rayakan
+              ? 'Target harian tercapai — silakan lanjut bila masih ingin menambah'
+              : settings.shakeToCount
+                ? 'Ketuk teks atau goyangkan perangkat tiap satu sholawat'
+                : 'Ketuk teks atau lingkaran tiap satu sholawat'}
+          </span>
+        </p>
+      )}
+
+      <div className="session__dock session__dock--flat">
+        <div className="session__dock-meter">
+          <div className="session__dock-label">
             <span>Total program</span>
-            <span className="spacer" />
             <span>
               {formatNumber(progress.total)} / {formatNumber(program.targetTotal)}
             </span>
@@ -147,22 +159,18 @@ export function SholawatBacaPage() {
           </div>
         </div>
 
-        <div className="session__controls">
-          <button
-            type="button"
-            className="btn btn--secondary btn--sm"
-            onClick={() => addCount(-1)}
-            disabled={progress.today === 0}
-          >
-            Kurangi
-          </button>
-          <button
-            type="button"
-            className="btn btn--primary btn--sm"
-            onClick={() => navigate('/sholawat')}
-          >
-            <IconCheck style={{ width: 16, height: 16 }} /> Selesai
-          </button>
+        <div className="session__dock-row">
+          <span className="session__dock-slot" />
+          <TasbihRing count={progress.today} target={targetHariIni} onTap={onTap} size={ringSize} />
+          <span className="session__dock-slot session__dock-slot--kanan">
+            <button
+              type="button"
+              className="btn btn--primary btn--sm"
+              onClick={() => navigate('/sholawat')}
+            >
+              <IconCheck style={{ width: 16, height: 16 }} /> Selesai
+            </button>
+          </span>
         </div>
       </div>
     </main>

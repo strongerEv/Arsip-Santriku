@@ -78,22 +78,17 @@
 
 .session__body {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
   min-height: 0;
   overflow-y: auto;
-  padding: 14px 2px;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   max-width: var(--page-max);
   margin: 0 auto;
+  padding: 14px 2px;
 }
 
-/*
- * Isi dipusatkan lewat auto-margin, bukan `justify-content: center`:
- * saat kartu lebih tinggi dari layar, auto-margin menyusut jadi nol sehingga
- * bagian atas kartu tidak ikut terpotong saat digulir.
- */
+/* Pemusatan lewat auto-margin agar sisi atas tidak terpotong saat meluap. */
 .session__body > :first-child {
   margin-top: auto;
 }
@@ -102,17 +97,136 @@
   margin-bottom: auto;
 }
 
-.session__body > * {
-  flex: none;
-}
-
-.session__counter-area {
+.session__reading {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  width: 100%;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  /* Ruang bawah disisakan seluas dock agar akhir teks tidak tertutup. */
+  padding: 12px 2px calc(var(--dock-h, 150px) + 20px);
+  -webkit-tap-highlight-color: transparent;
   display: flex;
   flex-direction: column;
+}
+
+/* Kartu pendek dipusatkan; kartu panjang tetap mulai dari atas karena
+   auto-margin menyusut jadi nol ketika ruang habis. */
+.session__reading > :first-child {
+  margin-top: auto;
+}
+
+.session__reading > :last-child {
+  margin-bottom: auto;
+}
+
+/* Seluruh area baca ikut jadi tombol tasbih: ibu jari bisa mengetuk
+   di mana saja sambil mata tetap membaca teks Arab. */
+.session__reading--tappable {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.session__dock {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: calc(var(--safe-bottom) + 12px);
+  z-index: 5;
+  display: flex;
   align-items: center;
-  gap: 14px;
-  flex: none;
-  padding-top: 4px;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-xl);
+  /* Dasar opaque supaya isi dock tetap terbaca di browser tanpa
+     backdrop-filter; efek kaca hanya dipakai bila didukung. */
+  background: var(--bg-elevated);
+  border: 1px solid var(--separator);
+  box-shadow: var(--shadow-raised);
+  max-width: calc(var(--page-max) - 24px);
+  margin: 0 auto;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .session__dock {
+    background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+    backdrop-filter: saturate(180%) blur(22px);
+    -webkit-backdrop-filter: saturate(180%) blur(22px);
+  }
+
+  .session__hint span {
+    background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+  }
+}
+
+.session__dock-slot {
+  flex: 1 1 0;
+  display: flex;
+  min-width: 0;
+}
+
+.session__dock-slot--kanan {
+  justify-content: flex-end;
+}
+
+.session__dock--flat {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.session__dock-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.session__dock-meter {
+  width: 100%;
+}
+
+.session__dock-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 5px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Petunjuk singkat mengambang tepat di atas dock. Diberi latar pil agar
+   tetap terbaca ketika teks Arab yang panjang bergulir di belakangnya. */
+.session__hint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--safe-bottom) + var(--dock-h, 150px) + 18px);
+  text-align: center;
+  pointer-events: none;
+  padding: 0 20px;
+  z-index: 4;
+}
+
+.session__hint span {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-card);
+  animation: fade-in 0.3s var(--ease-out) both;
+}
+
+.session__hint--accent span {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* -- Activity ring ------------------------------------------------------- */
@@ -166,7 +280,6 @@
 
 .ring__glow {
   fill: var(--card);
-  filter: drop-shadow(0 8px 20px rgba(5, 150, 105, 0.14));
 }
 
 [data-theme='dark'] .ring__glow {
@@ -216,13 +329,6 @@
   gap: 10px;
   flex: none;
   flex-wrap: wrap;
-}
-
-.session__note {
-  text-align: center;
-  font-size: 12.5px;
-  color: var(--text-tertiary);
-  flex: none;
 }
 
 /* Kilau lembut saat target tercapai */
