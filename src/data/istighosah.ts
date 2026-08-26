@@ -200,5 +200,3 @@ export const ISTIGHOSAH_ANNAJAH: ReadingPackage = {
     },
   ],
 }
-
-export const BUILT_IN_PACKAGES: ReadingPackage[] = [ISTIGHOSAH_ANNAJAH]

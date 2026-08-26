@@ -10,7 +10,7 @@ import {
 import type { ArchiveDoc, ReadingPackage } from '../types'
 import { KEYS, loadJSON, saveJSON } from '../lib/storage'
 import { SEED_ARCHIVES } from '../data/arsipSeed'
-import { BUILT_IN_PACKAGES } from '../data/istighosah'
+import { BUILT_IN_PACKAGES } from '../data/packages'
 import { createId } from '../lib/format'
 
 export type ArchiveDraft = Omit<ArchiveDoc, 'id' | 'createdAt' | 'updatedAt' | 'builtIn'>

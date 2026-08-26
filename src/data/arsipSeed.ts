@@ -1,5 +1,6 @@
 import type { ArchiveDoc } from '../types'
 import { ISTIGHOSAH_ANNAJAH } from './istighosah'
+import { TAHLIL_ARWAH } from './tahlil'
 
 const DAY = 24 * 60 * 60 * 1000
 const base = Date.parse('2025-01-06T08:00:00+07:00')
@@ -26,6 +27,20 @@ export const SEED_ARCHIVES: ArchiveDoc[] = [
     status: 'terbit',
     builtIn: true,
     packageId: ISTIGHOSAH_ANNAJAH.id,
+  },
+  {
+    id: 'seed-tahlil-arwah',
+    title: 'Tahlil & Doa Arwah (Lengkap)',
+    category: 'tahlil',
+    body: 'Susunan lengkap bacaan tahlil beserta doa untuk arwah, dari tawassul hingga doa penutup. Tersedia dalam mode sesi dengan tasbih digital.',
+    translation: TAHLIL_ARWAH.description,
+    author: 'NU Online',
+    source: 'Bacaan Tahlil dan Doa Arwah — NU Online',
+    createdAt: at(110),
+    updatedAt: at(110),
+    status: 'terbit',
+    builtIn: true,
+    packageId: TAHLIL_ARWAH.id,
   },
   {
     id: 'seed-tawassul',

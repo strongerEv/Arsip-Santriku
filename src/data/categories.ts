@@ -2,6 +2,7 @@ import type { Category, CategoryId } from '../types'
 
 export const CATEGORIES: Category[] = [
   { id: 'istighosah', label: 'Istighosah' },
+  { id: 'tahlil', label: 'Tahlil' },
   { id: 'wirid', label: 'Wirid' },
   { id: 'sholawat', label: 'Sholawat' },
   { id: 'doa', label: 'Doa' },

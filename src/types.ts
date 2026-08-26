@@ -1,5 +1,6 @@
 export type CategoryId =
   | 'istighosah'
+  | 'tahlil'
   | 'wirid'
   | 'sholawat'
   | 'doa'

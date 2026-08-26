@@ -40,7 +40,7 @@ export function StatistikPage() {
         </div>
         <div className="stat-card">
           <p className="stat-card__value">{formatNumber(ringkasan.khatam)}</p>
-          <p className="stat-card__label">Khatam istighosah</p>
+          <p className="stat-card__label">Amalan dikhatamkan</p>
         </div>
         <div className="stat-card">
           <p className="stat-card__value">{formatNumber(ringkasan.sesi)}</p>
@@ -86,7 +86,7 @@ export function StatistikPage() {
       {stats.completions.length === 0 ? (
         <EmptyState
           title="Belum ada sesi tercatat"
-          description="Riwayat muncul setelah kamu menyelesaikan satu sesi istighosah."
+          description="Riwayat muncul setelah kamu menyelesaikan satu sesi amalan."
         />
       ) : (
         <div className="stack">

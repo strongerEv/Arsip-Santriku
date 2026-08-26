@@ -24,7 +24,7 @@ export function ReadingCard({
   animateKey,
 }: ReadingCardProps) {
   const targetLabel = !reading.counted
-    ? 'Pembuka'
+    ? ''
     : reading.target
       ? `${reading.target}×`
       : 'Sebanyak-banyaknya'

@@ -100,7 +100,7 @@ export function ArsipDetailPage() {
 
       {doc.packageId && (
         <Link
-          to={`/istighosah/${doc.packageId}`}
+          to={`/amalan/${doc.packageId}`}
           className="btn btn--primary btn--block"
           style={{ marginTop: 18 }}
         >

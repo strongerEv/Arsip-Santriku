@@ -22,7 +22,7 @@ export function PaketDetailPage() {
       <main className="page page-enter">
         <EmptyState title="Paket bacaan tidak ditemukan" />
         <p style={{ textAlign: 'center' }}>
-          <Link to="/istighosah" className="btn btn--tinted btn--sm">
+          <Link to="/amalan" className="btn btn--tinted btn--sm">
             Kembali
           </Link>
         </p>
@@ -86,7 +86,7 @@ export function PaketDetailPage() {
           style={{ marginTop: 20 }}
           onClick={onStart}
         >
-          <IconPlay style={{ width: 18, height: 18 }} /> Mulai Istighosah
+          <IconPlay style={{ width: 18, height: 18 }} /> Mulai Sesi
         </button>
       )}
 
@@ -98,7 +98,7 @@ export function PaketDetailPage() {
               <span className="reading-card__index">{index + 1}</span>
               <span className="reading-card__target">
                 {!reading.counted
-                  ? 'Pembuka'
+                  ? ''
                   : reading.target
                     ? `${reading.target}×`
                     : 'Sebanyak-banyaknya'}

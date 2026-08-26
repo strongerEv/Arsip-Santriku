@@ -125,7 +125,7 @@ export function SesiPage() {
       <main className="page page-enter page--flush">
         <EmptyState title="Paket bacaan tidak ditemukan" />
         <p style={{ textAlign: 'center' }}>
-          <Link to="/istighosah" className="btn btn--tinted btn--sm">
+          <Link to="/amalan" className="btn btn--tinted btn--sm">
             Kembali ke daftar paket
           </Link>
         </p>
@@ -143,7 +143,7 @@ export function SesiPage() {
               <IconCheck />
             </span>
             <h1 className="finish__title">
-              {summary.complete ? 'Istighosah Selesai' : 'Sesi Diakhiri'}
+              {summary.complete ? 'Alhamdulillah' : 'Sesi Diakhiri'}
             </h1>
             <p className="text-secondary" style={{ maxWidth: 320 }}>
               {summary.complete
@@ -346,7 +346,7 @@ export function SesiPage() {
               className="btn btn--primary btn--block"
               onClick={() => {
                 setAskExit(false)
-                navigate('/istighosah', { replace: true })
+                navigate('/amalan', { replace: true })
               }}
             >
               Simpan & keluar
@@ -367,7 +367,7 @@ export function SesiPage() {
               onClick={() => {
                 abandon()
                 setAskExit(false)
-                navigate('/istighosah', { replace: true })
+                navigate('/amalan', { replace: true })
               }}
             >
               Buang sesi ini

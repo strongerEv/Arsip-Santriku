@@ -11,13 +11,13 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 
 ### Modul A — Arsip Santri
 - Simpan dokumen: teks Arab berharakat, transliterasi Latin, terjemahan, catatan bebas, dan foto/scan naskah.
-- Kategori: Istighosah, Wirid, Sholawat, Doa, Materi Kajian, Surat/Pengumuman, Lainnya.
+- Kategori: Istighosah, Tahlil, Wirid, Sholawat, Doa, Materi Kajian, Surat/Pengumuman, Lainnya.
 - Pencarian bebas (judul, teks, pengunggah, sumber) dan filter kategori.
 - **Kontribusi terverifikasi**: arsip baru masuk sebagai "usulan" hingga ditandai terverifikasi.
 - **Export/Share**: bagikan teks arsip yang sudah dirapikan lewat share sheet perangkat, atau salin ke papan klip.
 
 ### Modul B — Bacaan berhitung + tasbih digital
-- Paket bacaan tersusun sebagai playlist berurutan.
+- Paket bacaan tersusun sebagai playlist berurutan (tab **Amalan**: Istighosah dan Tahlil).
 - Tombol tasbih berbentuk **activity ring** (seperti Apple Watch) dengan angka besar di tengah.
 - Hitungan naik tiap ketukan, atau dengan **menggoyangkan perangkat** (opsional, butuh izin sensor gerak).
 - **Auto-pindah** ke bacaan berikutnya saat target tercapai, dengan transisi halus + getar penanda.
@@ -50,10 +50,15 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 
 ## Data bawaan
 
-Paket **Istighosah Pesma An Najah** (17 bacaan) sudah tersedia sesuai naskah pada PRD:
-tawassul pembuka tanpa hitungan, bacaan #2–16 dengan target 41× / 7×, dan bacaan #17
-(`اَللهُ اَللهُ اَللهُ`) tanpa target tetap. Setiap bacaan berhitung dilengkapi
-transliterasi Latin dan terjemahan Bahasa Indonesia.
+**Istighosah Pesma An Najah** (17 bacaan) sesuai naskah pada PRD: tawassul pembuka tanpa
+hitungan, bacaan #2–16 dengan target 41× / 7×, dan bacaan #17 (`اَللهُ اَللهُ اَللهُ`) tanpa
+target tetap. Setiap bacaan berhitung dilengkapi transliterasi Latin dan terjemahan.
+
+**Tahlil & Doa Arwah** (39 bacaan) sesuai naskah NU Online: tawassul, Al-Ikhlas 3×,
+Al-Falaq, An-Nas, Al-Fatihah, Al-Baqarah 1–5, 163, Ayat Kursi, 284–286, Irhamna 7×,
+Hud 73, Al-Ahzab 33 & 56, rangkaian sholawat, istighfar 3×, tahlil 100×, tasbih 7× dan
+33×, hingga doa penutup. Teks Arab berharakat tanpa terjemahan agar ringkas saat dibaca
+bersama; bacaan yang punya jumlah pengulangan otomatis memakai tasbih digital.
 
 ## Menjalankan
 
@@ -71,9 +76,9 @@ npm run typecheck # pemeriksaan tipe
 src/
 ├─ components/   # Card bacaan, activity ring tasbih, sheet, tab bar, ikon
 ├─ context/      # Settings, Library (arsip), Session (sesi & statistik), Sholawat, Toast
-├─ data/         # Paket istighosah, arsip bawaan, kategori, teks sholawat
+├─ data/         # Paket istighosah & tahlil, arsip bawaan, kategori, teks sholawat
 ├─ lib/          # Penyimpanan lokal, haptic, wake lock, deteksi goyang, share, hitungan program
-├─ pages/        # Beranda, Arsip, Istighosah, Sesi, Cinta Shalawat, Statistik, Pengaturan
+├─ pages/        # Beranda, Arsip, Amalan, Sesi, Cinta Shalawat, Statistik, Pengaturan
 ├─ styles/       # Design token, base, komponen, mode sesi
 └─ types.ts
 ```

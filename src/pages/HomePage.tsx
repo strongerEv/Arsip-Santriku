@@ -79,7 +79,7 @@ export function HomePage() {
           <button
             type="button"
             className="card card--accent card--tappable"
-            onClick={() => navigate(`/istighosah/${mainPackage.id}`)}
+            onClick={() => navigate(`/amalan/${mainPackage.id}`)}
           >
             <p className="card__eyebrow" style={{ color: 'rgba(255,255,255,.72)' }}>
               Bacaan rutin
@@ -104,7 +104,7 @@ export function HomePage() {
         </Link>
         <Link to="/statistik" className="stat-card card--tappable">
           <p className="stat-card__value">{formatNumber(khatam)}</p>
-          <p className="stat-card__label">Istighosah dikhatamkan</p>
+          <p className="stat-card__label">Amalan dikhatamkan</p>
         </Link>
       </div>
 

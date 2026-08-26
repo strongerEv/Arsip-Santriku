@@ -1,10 +1,10 @@
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import { TabBar } from './components/TabBar'
 import { HomePage } from './pages/HomePage'
 import { ArsipPage } from './pages/ArsipPage'
 import { ArsipDetailPage } from './pages/ArsipDetailPage'
 import { ArsipEditorPage } from './pages/ArsipEditorPage'
-import { IstighosahPage } from './pages/IstighosahPage'
+import { AmalanPage } from './pages/AmalanPage'
 import { PaketDetailPage } from './pages/PaketDetailPage'
 import { SesiPage } from './pages/SesiPage'
 import { SholawatPage } from './pages/SholawatPage'
@@ -12,6 +12,12 @@ import { SholawatSetupPage } from './pages/SholawatSetupPage'
 import { SholawatBacaPage } from './pages/SholawatBacaPage'
 import { StatistikPage } from './pages/StatistikPage'
 import { PengaturanPage } from './pages/PengaturanPage'
+
+/** Mengarahkan tautan paket dari versi sebelumnya ke rute Amalan. */
+function PaketLamaRedirect() {
+  const { packageId } = useParams()
+  return <Navigate to={`/amalan/${packageId}`} replace />
+}
 
 export default function App() {
   const location = useLocation()
@@ -27,8 +33,11 @@ export default function App() {
         <Route path="/arsip/baru" element={<ArsipEditorPage />} />
         <Route path="/arsip/:id" element={<ArsipDetailPage />} />
         <Route path="/arsip/:id/ubah" element={<ArsipEditorPage />} />
-        <Route path="/istighosah" element={<IstighosahPage />} />
-        <Route path="/istighosah/:packageId" element={<PaketDetailPage />} />
+        <Route path="/amalan" element={<AmalanPage />} />
+        <Route path="/amalan/:packageId" element={<PaketDetailPage />} />
+        {/* Rute lama dari versi sebelumnya tetap dapat dibuka. */}
+        <Route path="/istighosah" element={<Navigate to="/amalan" replace />} />
+        <Route path="/istighosah/:packageId" element={<PaketLamaRedirect />} />
         <Route path="/sesi/:packageId" element={<SesiPage />} />
         <Route path="/sholawat" element={<SholawatPage />} />
         <Route path="/sholawat/baru" element={<SholawatSetupPage mode="baru" />} />
