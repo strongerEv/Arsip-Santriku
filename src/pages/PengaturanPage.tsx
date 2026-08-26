@@ -8,7 +8,8 @@ import { haptic } from '../lib/haptics'
 import { clearAll } from '../lib/storage'
 import { Sheet } from '../components/Sheet'
 import { ListRow, PageHeader, Segmented, Switch } from '../components/ui'
-import { IconMoon, IconTextSize } from '../components/Icons'
+import { IconMoon, IconSparkles, IconTextSize, IconWhatsApp } from '../components/Icons'
+import { APP_VERSION, DEVELOPER, tautanUsulanFitur } from '../lib/kontak'
 
 export function PengaturanPage() {
   const { settings, update, reset } = useSettings()
@@ -201,8 +202,49 @@ export function PengaturanPage() {
           untuk bacaan berhitung. Seluruh data tersimpan di perangkatmu sendiri dan tetap bisa
           dibuka tanpa internet setelah aplikasi dimuat sekali.
         </p>
-        <p className="muted-note" style={{ marginTop: 12 }}>Versi 1.0.0</p>
+        <p className="muted-note" style={{ marginTop: 12 }}>Versi {APP_VERSION}</p>
       </div>
+
+      <div className="card" style={{ marginTop: 12 }}>
+        <div className="row" style={{ alignItems: 'flex-start', gap: 12 }}>
+          <span className="list-row__icon">
+            <IconSparkles />
+          </span>
+          <span>
+            <span className="card__title" style={{ display: 'block', fontSize: 15 }}>
+              Terus dikembangkan
+            </span>
+            <span className="card__meta" style={{ display: 'block', marginTop: 6, lineHeight: 1.65 }}>
+              Aplikasi ini akan terus mendapat pembaruan — fitur baru, penyempurnaan tampilan, dan
+              tambahan arsip. Pembaruan terpasang sendiri saat aplikasi dibuka dalam keadaan
+              online, jadi tidak perlu memasang ulang.
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <h2 className="section-title">Punya usulan fitur?</h2>
+      <div className="card">
+        <p className="card__meta" style={{ lineHeight: 1.65 }}>
+          Ada fitur yang ingin ditambahkan, atau bacaan yang perlu dimasukkan ke arsip? Kirim
+          langsung ke pengembang lewat WhatsApp — pesannya sudah disiapkan, tinggal dilengkapi.
+        </p>
+        <a
+          className="btn btn--primary btn--block"
+          style={{ marginTop: 16 }}
+          href={tautanUsulanFitur()}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <IconWhatsApp style={{ width: 18, height: 18 }} /> Kirim usulan lewat WhatsApp
+        </a>
+      </div>
+
+      <footer className="app-credit">
+        <p className="app-credit__line">
+          Develop by <span className="app-credit__name">{DEVELOPER}</span>
+        </p>
+      </footer>
 
       <Sheet
         open={confirmReset}

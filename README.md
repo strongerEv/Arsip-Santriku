@@ -47,6 +47,7 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 - **Mode offline** — service worker mem-precache seluruh aplikasi dan bacaan; data tersimpan di perangkat.
 - **Statistik personal** — total hitungan tasbih, jumlah khatam, jumlah sesi, total waktu berdzikir, riwayat sesi.
 - **Mode gelap** (mengikuti sistem / manual) dan **pengaturan ukuran serta jarak baris teks Arab**.
+- **Kirim usulan fitur** langsung ke pengembang lewat WhatsApp, dengan template pesan yang sudah tersusun.
 
 ## Data bawaan
 
@@ -87,6 +88,14 @@ src/
   manual — jadi tombolnya tetap membawa maju di perangkat mana pun.
 - Font Arab memakai Amiri / Scheherazade New dari Google Fonts dengan fallback font sistem,
   dan di-cache agar tetap tampil saat offline.
+
+## Kontak pengembang
+
+Tombol "Kirim usulan lewat WhatsApp" pada halaman Pengaturan membuka WhatsApp dengan
+template pesan usulan fitur yang sudah terisi. Nomor tujuan disimpan di
+`src/lib/kontak.ts` dan sengaja tidak pernah ditampilkan sebagai teks di antarmuka —
+pengguna hanya melihat tombolnya. (Nomor tetap ada di dalam tautan `wa.me`, jadi masih
+terbaca bila seseorang memeriksa sumber halaman; ini melekat pada cara kerja tautan WhatsApp.)
 
 ## Belum diimplementasi
 

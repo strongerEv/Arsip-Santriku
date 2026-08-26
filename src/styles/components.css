@@ -786,3 +786,25 @@ textarea.field__control.is-arabic {
   color: var(--text-secondary);
   margin-bottom: 5px;
 }
+
+/* -- Kredit pengembang --------------------------------------------------- */
+
+.app-credit {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.app-credit__line {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.2px;
+}
+
+.app-credit__name {
+  font-family: var(--font-arabic);
+  font-size: 19px;
+  color: var(--text-secondary);
+  vertical-align: -2px;
+  margin-right: 2px;
+  unicode-bidi: isolate;
+}
