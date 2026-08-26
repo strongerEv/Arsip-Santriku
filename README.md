@@ -25,6 +25,7 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 - Target `null` ("sebanyak-banyaknya") tidak auto-pindah — diakhiri lewat tombol **Selesai**.
 - Reset hitungan per bacaan, kurangi hitungan, maju/mundur antar bacaan.
 - **Lanjutkan sesi**: sesi yang ditinggal tersimpan otomatis dan bisa dilanjutkan dari Beranda.
+- **Buka bacaan langsung**: setiap kartu pada daftar urutan bacaan bisa diketuk untuk langsung membaca bagian itu — misalnya hanya doa penutup tahlil — tanpa harus melewati bacaan sebelumnya. Sesi yang dibuka dengan cara melompat dicatat sebagai "sebagian", bukan khatam.
 
 ### Modul C — Mode sesi istighosah
 - Layar fokus penuh tanpa tab bar, teks Arab besar, minim distraksi.

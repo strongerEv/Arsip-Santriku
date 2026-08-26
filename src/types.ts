@@ -71,6 +71,11 @@ export interface RunningSession {
   totalTaps: number
   startedAt: number
   updatedAt: number
+  /**
+   * Sesi dijalankan utuh dari bacaan pertama. Bernilai false bila santri
+   * melompat langsung ke bacaan tertentu, sehingga tidak dihitung khatam.
+   */
+  fullRun?: boolean
 }
 
 export interface CompletionRecord {

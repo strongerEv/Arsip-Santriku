@@ -17,6 +17,11 @@ interface SessionContextValue {
   stats: Stats
   /** Mulai sesi baru; sesi lama yang belum selesai akan ditimpa. */
   start: (pkg: ReadingPackage) => void
+  /**
+   * Buka satu bacaan tertentu. Bila sesi paket ini sedang berjalan, sesi itu
+   * dilanjutkan pada bacaan tersebut — hitungan yang sudah tercatat tidak hilang.
+   */
+  openAt: (pkg: ReadingPackage, index: number) => void
   /** Tambah hitungan bacaan yang sedang berjalan. */
   addCount: (delta?: number) => void
   /** Tambah hitungan ke statistik global saja (dipakai Program Cinta Shalawat). */
@@ -85,6 +90,28 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       totalTaps: 0,
       startedAt: now,
       updatedAt: now,
+      fullRun: true,
+    })
+  }, [])
+
+  const openAt = useCallback<SessionContextValue['openAt']>((pkg, index) => {
+    setSession((prev) => {
+      const now = Date.now()
+      // Melompat ke bacaan selain yang pertama membuat sesi tidak lagi utuh.
+      const fullRun = index === 0
+      if (prev && prev.packageId === pkg.id) {
+        return { ...prev, index, count: 0, updatedAt: now, fullRun: prev.fullRun && fullRun }
+      }
+      return {
+        packageId: pkg.id,
+        index,
+        count: 0,
+        perReading: {},
+        totalTaps: 0,
+        startedAt: now,
+        updatedAt: now,
+        fullRun,
+      }
     })
   }, [])
 
@@ -142,7 +169,8 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         totalTaps: current?.totalTaps ?? 0,
         readingsDone: Object.keys(perReading).length,
         readingsTotal: pkg.readings.length,
-        complete,
+        // Hanya sesi yang dijalankan utuh yang dihitung khatam.
+        complete: complete && (current?.fullRun ?? true),
       }
       setStats((prev) => ({ ...prev, completions: [record, ...prev.completions].slice(0, 100) }))
       setSession(null)
@@ -164,6 +192,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       session,
       stats,
       start,
+      openAt,
       addCount,
       bumpTaps,
       resetCount,
@@ -177,6 +206,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       session,
       stats,
       start,
+      openAt,
       addCount,
       bumpTaps,
       resetCount,

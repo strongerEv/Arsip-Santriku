@@ -4,14 +4,14 @@ import { useLibrary } from '../context/LibraryContext'
 import { useSession } from '../context/SessionContext'
 import { useSettings } from '../context/SettingsContext'
 import { PreSessionSheet } from '../components/PreSessionSheet'
-import { IconChevronLeft, IconPlay, IconRefresh } from '../components/Icons'
+import { IconChevronLeft, IconChevronRight, IconPlay, IconRefresh } from '../components/Icons'
 import { EmptyState } from '../components/ui'
 
 export function PaketDetailPage() {
   const { packageId = '' } = useParams()
   const navigate = useNavigate()
   const { getPackage } = useLibrary()
-  const { session, start } = useSession()
+  const { session, start, openAt } = useSession()
   const { settings } = useSettings()
   const [askAirplane, setAskAirplane] = useState(false)
 
@@ -35,6 +35,15 @@ export function PaketDetailPage() {
   const beginSession = () => {
     start(pkg)
     setAskAirplane(false)
+    navigate(`/sesi/${pkg.id}`)
+  }
+
+  /**
+   * Buka satu bacaan langsung. Pengingat sebelum sesi sengaja dilewati:
+   * ini jalan pintas untuk membaca satu bagian, bukan memulai sesi penuh.
+   */
+  const bukaBacaan = (index: number) => {
+    openAt(pkg, index)
     navigate(`/sesi/${pkg.id}`)
   }
 
@@ -91,10 +100,20 @@ export function PaketDetailPage() {
       )}
 
       <h2 className="section-title">Urutan bacaan</h2>
+      <p className="muted-note" style={{ margin: '-4px 4px 12px' }}>
+        Ketuk bacaan mana pun untuk langsung membacanya, tanpa harus mulai dari awal.
+      </p>
       <div className="stack">
         {pkg.readings.map((reading, index) => (
-          <article key={reading.id} className="card">
-            <div className="reading-card__head" style={{ marginBottom: 12 }}>
+          <button
+            key={reading.id}
+            type="button"
+            className="card card--tappable"
+            onClick={() => bukaBacaan(index)}
+            aria-label={`Baca bacaan ${index + 1}: ${reading.title}`}
+          >
+            {/* Isi memakai span agar markup di dalam <button> tetap valid. */}
+            <span className="reading-card__head" style={{ marginBottom: 12 }}>
               <span className="reading-card__index">{index + 1}</span>
               <span className="reading-card__target">
                 {!reading.counted
@@ -103,25 +122,33 @@ export function PaketDetailPage() {
                     ? `${reading.target}×`
                     : 'Sebanyak-banyaknya'}
               </span>
-            </div>
-            <p className="card__title" style={{ fontSize: 15, color: 'var(--text-secondary)' }}>
-              {reading.title}
-            </p>
-            <p
+            </span>
+
+            <span className="row" style={{ gap: 8 }}>
+              <span className="card__title" style={{ fontSize: 15, color: 'var(--text-secondary)' }}>
+                {reading.title}
+              </span>
+              <span className="spacer" />
+              <span className="list-row__chevron">
+                <IconChevronRight />
+              </span>
+            </span>
+
+            <span
               className="arabic"
               style={{
+                display: '-webkit-box',
                 textAlign: 'center',
                 fontSize: 'calc(var(--arabic-size) * 0.8)',
                 marginTop: 10,
-                display: '-webkit-box',
                 WebkitLineClamp: 3,
                 WebkitBoxOrient: 'vertical',
                 overflow: 'hidden',
               }}
             >
               {reading.arabic}
-            </p>
-          </article>
+            </span>
+          </button>
         ))}
       </div>
 
