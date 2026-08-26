@@ -28,9 +28,8 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 
 ### Modul C — Mode sesi istighosah
 - Layar fokus penuh tanpa tab bar, teks Arab besar, minim distraksi.
-- **Pop-up pengingat sebelum sesi**: imbauan mengaktifkan Mode Pesawat / mematikan data & WiFi, dengan tombol
-  "Aktifkan Mode Pesawat Sekarang" (mencoba membuka pengaturan sistem di Android) dan
-  "Lanjutkan Tanpa Mengubah Pengaturan".
+- **Pop-up pengingat sebelum sesi**: imbauan mengaktifkan Mode Pesawat atau mematikan data & WiFi,
+  lalu satu tombol "Mulai" untuk langsung masuk sesi.
 - **Do Not Disturb ringan**: notifikasi internal aplikasi dibisukan selama sesi.
 - Layar dijaga tetap menyala selama sesi (Screen Wake Lock).
 - Layar "Istighosah Selesai" berisi ringkasan hitungan, jumlah bacaan, dan durasi.
@@ -83,9 +82,8 @@ src/
 
 - Seluruh data disimpan di `localStorage` perangkat — tidak ada server, tidak ada akun.
 - Getar (Vibration API) tidak didukung Safari iOS; ketukan tetap berfungsi normal.
-- Aplikasi web tidak diizinkan mengubah pengaturan sistem. Tombol "Aktifkan Mode Pesawat Sekarang"
-  mencoba membuka halaman pengaturan lewat intent Android, lalu **selalu** lanjut ke langkah panduan
-  manual — jadi tombolnya tetap membawa maju di perangkat mana pun.
+- Aplikasi web tidak diizinkan mengubah pengaturan sistem, jadi Mode Pesawat diaktifkan sendiri
+  oleh santri — pop-up sebelum sesi hanya berperan sebagai pengingat.
 - Font Arab memakai Amiri / Scheherazade New dari Google Fonts dengan fallback font sistem,
   dan di-cache agar tetap tampil saat offline.
 
