@@ -7,6 +7,7 @@ import { ArsipEditorPage } from './pages/ArsipEditorPage'
 import { AmalanPage } from './pages/AmalanPage'
 import { PaketDetailPage } from './pages/PaketDetailPage'
 import { SesiPage } from './pages/SesiPage'
+import { ProgramPage } from './pages/ProgramPage'
 import { SholawatPage } from './pages/SholawatPage'
 import { SholawatSetupPage } from './pages/SholawatSetupPage'
 import { SholawatBacaPage } from './pages/SholawatBacaPage'
@@ -23,7 +24,7 @@ export default function App() {
   const location = useLocation()
   // Mode sesi tampil penuh layar tanpa tab bar agar benar-benar minim distraksi.
   const focusMode =
-    location.pathname.startsWith('/sesi') || location.pathname === '/sholawat/baca'
+    location.pathname.startsWith('/sesi') || location.pathname === '/program/sholawat/baca'
 
   return (
     <div className="app-shell">
@@ -39,10 +40,16 @@ export default function App() {
         <Route path="/istighosah" element={<Navigate to="/amalan" replace />} />
         <Route path="/istighosah/:packageId" element={<PaketLamaRedirect />} />
         <Route path="/sesi/:packageId" element={<SesiPage />} />
-        <Route path="/sholawat" element={<SholawatPage />} />
-        <Route path="/sholawat/baru" element={<SholawatSetupPage mode="baru" />} />
-        <Route path="/sholawat/ubah" element={<SholawatSetupPage mode="ubah" />} />
-        <Route path="/sholawat/baca" element={<SholawatBacaPage />} />
+        <Route path="/program" element={<ProgramPage />} />
+        <Route path="/program/sholawat" element={<SholawatPage />} />
+        <Route path="/program/sholawat/baru" element={<SholawatSetupPage mode="baru" />} />
+        <Route path="/program/sholawat/ubah" element={<SholawatSetupPage mode="ubah" />} />
+        <Route path="/program/sholawat/baca" element={<SholawatBacaPage />} />
+        {/* Rute Cinta Shalawat dari versi sebelumnya. */}
+        <Route path="/sholawat" element={<Navigate to="/program/sholawat" replace />} />
+        <Route path="/sholawat/baru" element={<Navigate to="/program/sholawat/baru" replace />} />
+        <Route path="/sholawat/ubah" element={<Navigate to="/program/sholawat/ubah" replace />} />
+        <Route path="/sholawat/baca" element={<Navigate to="/program/sholawat/baca" replace />} />
         <Route path="/statistik" element={<StatistikPage />} />
         <Route path="/pengaturan" element={<PengaturanPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />

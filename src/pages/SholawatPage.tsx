@@ -12,6 +12,7 @@ import {
   IconCheckCircle,
   IconFlame,
   IconHeart,
+  IconChevronLeft,
   IconPencil,
   IconPlay,
   IconTarget,
@@ -31,6 +32,18 @@ export function SholawatPage() {
   if (!program) {
     return (
       <main className="page page-enter">
+        <div className="row" style={{ marginBottom: 14 }}>
+          <button
+            type="button"
+            className="icon-btn"
+            onClick={() => navigate('/program')}
+            aria-label="Kembali ke daftar program"
+          >
+            <IconChevronLeft />
+          </button>
+          <span className="spacer" />
+        </div>
+
         <PageHeader
           title="Cinta Shalawat"
           subtitle="Pasang target sholawat, biar aplikasi yang menghitung dan menjaga ritmenya."
@@ -52,7 +65,7 @@ export function SholawatPage() {
             hari.
           </p>
           <Link
-            to="/sholawat/baru"
+            to="/program/sholawat/baru"
             className="btn btn--sm"
             style={{ marginTop: 18, background: 'rgba(255,255,255,.2)', color: '#fff' }}
           >
@@ -118,6 +131,18 @@ export function SholawatPage() {
 
   return (
     <main className="page page-enter">
+      <div className="row" style={{ marginBottom: 14 }}>
+        <button
+          type="button"
+          className="icon-btn"
+          onClick={() => navigate('/program')}
+          aria-label="Kembali ke daftar program"
+        >
+          <IconChevronLeft />
+        </button>
+        <span className="spacer" />
+      </div>
+
       <PageHeader title="Cinta Shalawat" subtitle={program.name} />
 
       <div className="card card--raised" style={{ textAlign: 'center' }}>
@@ -181,7 +206,7 @@ export function SholawatPage() {
           type="button"
           className="btn btn--primary btn--block btn--lg"
           style={{ marginTop: 18 }}
-          onClick={() => navigate('/sholawat/baca')}
+          onClick={() => navigate('/program/sholawat/baca')}
         >
           <IconPlay style={{ width: 18, height: 18 }} /> Baca Sholawat Sekarang
         </button>
@@ -248,7 +273,7 @@ export function SholawatPage() {
       </div>
 
       <div className="list-group" style={{ marginTop: 22 }}>
-        <Link className="list-row" to="/sholawat/ubah">
+        <Link className="list-row" to="/program/sholawat/ubah">
           <span className="list-row__icon">
             <IconPencil />
           </span>

@@ -68,7 +68,7 @@ export function SholawatSetupPage({ mode = 'baru' }: { mode?: 'baru' | 'ubah' })
       createProgram(payload)
       toast('Program dimulai — semoga istiqamah')
     }
-    navigate('/sholawat', { replace: true })
+    navigate('/program/sholawat', { replace: true })
   }
 
   return (

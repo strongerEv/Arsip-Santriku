@@ -772,3 +772,20 @@ textarea.field__control.is-arabic {
   margin-right: 2px;
   unicode-bidi: isolate;
 }
+
+/* -- Kartu program yang belum tersedia ----------------------------------- */
+
+.card--segera {
+  box-shadow: none;
+  border: 1px dashed var(--separator-strong);
+  background: transparent;
+}
+
+.card--segera .card__title {
+  color: var(--text-secondary);
+}
+
+.list-row__icon--netral {
+  background: var(--fill-quaternary);
+  color: var(--text-tertiary);
+}

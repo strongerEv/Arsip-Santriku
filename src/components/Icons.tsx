@@ -262,3 +262,19 @@ export const IconSparkles = (p: IconProps) => (
     <path d="M18.4 4v2.6M17.1 5.3h2.6M5.6 16.4V18M4.8 17.2h1.6" />
   </Base>
 )
+
+export const IconSunrise = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M3.6 18.4h16.8" />
+    <path d="M6.9 14.6a5.1 5.1 0 0 1 10.2 0" />
+    <path d="M12 3.4v3.1M4.9 6.6 7 8.7M19.1 6.6 17 8.7" />
+  </Base>
+)
+
+export const IconLayers = (p: IconProps) => (
+  <Base {...p}>
+    <path d="m12 3.6 8.2 4.2-8.2 4.2-8.2-4.2z" />
+    <path d="m4.4 12.4 7.6 3.9 7.6-3.9" />
+    <path d="m4.4 16.4 7.6 3.9 7.6-3.9" />
+  </Base>
+)

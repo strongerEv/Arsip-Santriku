@@ -35,7 +35,14 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 - Layar dijaga tetap menyala selama sesi (Screen Wake Lock).
 - Layar "Istighosah Selesai" berisi ringkasan hitungan, jumlah bacaan, dan durasi.
 
-### Program Cinta Shalawat
+### Program
+
+Tab **Program** memuat amalan yang dijalankan bertahap dengan target dan progres harian.
+Yang sudah tersedia: **Cinta Shalawat**. Sedang disiapkan (tampil sebagai penanda, belum
+dapat dibuka): **One Day One Juz**, **Sholat Tahajud**, **Sedekah Subuh**, dan
+**Puasa Sunah** — seluruhnya berupa tracker, bukan penyedia teks bacaan.
+
+#### Cinta Shalawat
 - Susun target sholawat sendiri: **berapa jumlahnya** (mis. 10.000) **dalam berapa hari** (mis. 30) — keduanya bebas diatur, lengkap dengan preset cepat.
 - **Target harian dihitung otomatis** dan bisa menyesuaikan sendiri: sisa bacaan dibagi sisa hari, sehingga ketika sempat tertinggal targetnya ikut menyesuaikan.
 - Pilih teks sholawat (Jibril, Pendek, Ibrahimiyah, Nariyah, Munjiyat) atau tulis teks sendiri.
@@ -79,7 +86,7 @@ src/
 ├─ context/      # Settings, Library (arsip), Session (sesi & statistik), Sholawat, Toast
 ├─ data/         # Paket istighosah & tahlil, arsip bawaan, kategori, teks sholawat
 ├─ lib/          # Penyimpanan lokal, haptic, wake lock, deteksi goyang, share, hitungan program
-├─ pages/        # Beranda, Arsip, Amalan, Sesi, Cinta Shalawat, Statistik, Pengaturan
+├─ pages/        # Beranda, Arsip, Amalan, Sesi, Program, Statistik, Pengaturan
 ├─ styles/       # Design token, base, komponen, mode sesi
 └─ types.ts
 ```

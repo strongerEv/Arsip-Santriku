@@ -138,16 +138,16 @@ export function HomePage() {
           </p>
 
           <div className="row" style={{ gap: 8, marginTop: 14, flexWrap: 'wrap' }}>
-            <Link to="/sholawat/baca" className="btn btn--primary btn--sm">
+            <Link to="/program/sholawat/baca" className="btn btn--primary btn--sm">
               <IconPlay style={{ width: 16, height: 16 }} /> Baca sholawat
             </Link>
-            <Link to="/sholawat" className="btn btn--secondary btn--sm">
+            <Link to="/program/sholawat" className="btn btn--secondary btn--sm">
               Lihat progres
             </Link>
           </div>
         </div>
       ) : (
-        <Link to="/sholawat" className="card card--tappable">
+        <Link to="/program/sholawat" className="card card--tappable">
           <div className="row">
             <span className="list-row__icon">
               <IconHeart />

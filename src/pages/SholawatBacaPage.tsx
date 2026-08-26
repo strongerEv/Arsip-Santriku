@@ -67,7 +67,7 @@ export function SholawatBacaPage() {
           description="Susun program Cinta Shalawat terlebih dahulu."
         />
         <p style={{ textAlign: 'center' }}>
-          <button type="button" className="btn btn--tinted btn--sm" onClick={() => navigate('/sholawat')}>
+          <button type="button" className="btn btn--tinted btn--sm" onClick={() => navigate('/program/sholawat')}>
             Ke halaman program
           </button>
         </p>
@@ -91,7 +91,7 @@ export function SholawatBacaPage() {
         <button
           type="button"
           className="icon-btn"
-          onClick={() => navigate('/sholawat')}
+          onClick={() => navigate('/program/sholawat')}
           aria-label="Selesai membaca"
         >
           <IconClose />
@@ -166,7 +166,7 @@ export function SholawatBacaPage() {
             <button
               type="button"
               className="btn btn--primary btn--sm"
-              onClick={() => navigate('/sholawat')}
+              onClick={() => navigate('/program/sholawat')}
             >
               <IconCheck style={{ width: 16, height: 16 }} /> Selesai
             </button>
