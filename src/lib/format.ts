@@ -12,6 +12,16 @@ const dateTimeFmt = new Intl.DateTimeFormat('id-ID', {
   minute: '2-digit',
 })
 
+const dateShortFmt = new Intl.DateTimeFormat('id-ID', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+})
+
+export function formatDateShort(ts: number): string {
+  return dateShortFmt.format(new Date(ts))
+}
+
 export function formatDate(ts: number): string {
   return dateFmt.format(new Date(ts))
 }

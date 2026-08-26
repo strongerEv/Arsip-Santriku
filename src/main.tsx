@@ -5,6 +5,7 @@ import App from './App'
 import { SettingsProvider } from './context/SettingsContext'
 import { LibraryProvider } from './context/LibraryContext'
 import { SessionProvider } from './context/SessionContext'
+import { SholawatProvider } from './context/SholawatContext'
 import { ToastProvider } from './context/ToastContext'
 import './styles/index.css'
 
@@ -13,11 +14,13 @@ createRoot(document.getElementById('root')!).render(
     <SettingsProvider>
       <LibraryProvider>
         <SessionProvider>
-          <ToastProvider>
-            <HashRouter>
-              <App />
-            </HashRouter>
-          </ToastProvider>
+          <SholawatProvider>
+            <ToastProvider>
+              <HashRouter>
+                <App />
+              </HashRouter>
+            </ToastProvider>
+          </SholawatProvider>
         </SessionProvider>
       </LibraryProvider>
     </SettingsProvider>

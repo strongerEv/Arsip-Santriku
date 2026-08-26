@@ -7,13 +7,17 @@ import { ArsipEditorPage } from './pages/ArsipEditorPage'
 import { IstighosahPage } from './pages/IstighosahPage'
 import { PaketDetailPage } from './pages/PaketDetailPage'
 import { SesiPage } from './pages/SesiPage'
+import { SholawatPage } from './pages/SholawatPage'
+import { SholawatSetupPage } from './pages/SholawatSetupPage'
+import { SholawatBacaPage } from './pages/SholawatBacaPage'
 import { StatistikPage } from './pages/StatistikPage'
 import { PengaturanPage } from './pages/PengaturanPage'
 
 export default function App() {
   const location = useLocation()
   // Mode sesi tampil penuh layar tanpa tab bar agar benar-benar minim distraksi.
-  const focusMode = location.pathname.startsWith('/sesi')
+  const focusMode =
+    location.pathname.startsWith('/sesi') || location.pathname === '/sholawat/baca'
 
   return (
     <div className="app-shell">
@@ -26,6 +30,10 @@ export default function App() {
         <Route path="/istighosah" element={<IstighosahPage />} />
         <Route path="/istighosah/:packageId" element={<PaketDetailPage />} />
         <Route path="/sesi/:packageId" element={<SesiPage />} />
+        <Route path="/sholawat" element={<SholawatPage />} />
+        <Route path="/sholawat/baru" element={<SholawatSetupPage mode="baru" />} />
+        <Route path="/sholawat/ubah" element={<SholawatSetupPage mode="ubah" />} />
+        <Route path="/sholawat/baca" element={<SholawatBacaPage />} />
         <Route path="/statistik" element={<StatistikPage />} />
         <Route path="/pengaturan" element={<PengaturanPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />

@@ -214,3 +214,31 @@ export const IconWifiSlash = (p: IconProps) => (
     <circle cx="12" cy="19" r="0.9" fill="currentColor" stroke="none" />
   </Base>
 )
+
+export const IconHeart = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M12 19.8s-7.2-4.4-7.2-9.3a4.1 4.1 0 0 1 7.2-2.7 4.1 4.1 0 0 1 7.2 2.7c0 4.9-7.2 9.3-7.2 9.3Z" />
+  </Base>
+)
+
+export const IconTarget = (p: IconProps) => (
+  <Base {...p}>
+    <circle cx="12" cy="12" r="8.3" />
+    <circle cx="12" cy="12" r="4.6" />
+    <circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none" />
+  </Base>
+)
+
+export const IconCalendar = (p: IconProps) => (
+  <Base {...p}>
+    <rect x="3.8" y="5.2" width="16.4" height="15" rx="2.6" />
+    <path d="M3.8 9.6h16.4M8.4 3.6v3.2M15.6 3.6v3.2" />
+  </Base>
+)
+
+export const IconTrend = (p: IconProps) => (
+  <Base {...p}>
+    <path d="m4 15.5 4.6-4.6 3.2 3.2L20 6.5" />
+    <path d="M15.4 6.5H20v4.6" />
+  </Base>
+)

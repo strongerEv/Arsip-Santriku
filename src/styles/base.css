@@ -95,8 +95,7 @@ a {
   width: 100%;
   max-width: var(--page-max);
   margin: 0 auto;
-  padding: calc(var(--safe-top) + 14px) 18px
-    calc(var(--tabbar-height) + var(--safe-bottom) + 28px);
+  padding: var(--page-top) 18px calc(var(--tabbar-height) + var(--safe-bottom) + 28px);
 }
 
 .page--flush {

@@ -103,3 +103,35 @@ export interface Settings {
   autoAdvance: boolean
   airplaneReminder: boolean
 }
+
+/* ---- Program Cinta Shalawat ------------------------------------------- */
+
+export interface SholawatText {
+  id: string
+  name: string
+  arabic: string
+  latin?: string
+  translation?: string
+  /** Perkiraan waktu baca, dipakai untuk saran target harian yang masuk akal. */
+  detik: number
+}
+
+export interface SholawatProgram {
+  id: string
+  name: string
+  /** Jumlah sholawat yang ingin dicapai, mis. 10.000. */
+  targetTotal: number
+  /** Lama program dalam hari. */
+  days: number
+  /** Tanggal mulai, format 'YYYY-MM-DD' waktu lokal. */
+  startDate: string
+  textId: string
+  customName?: string
+  customArabic?: string
+  /** Hitungan per tanggal: { '2026-08-26': 340 }. */
+  log: Record<string, number>
+  /** Target harian ikut menyesuaikan sisa bacaan dan sisa hari. */
+  adaptiveDaily: boolean
+  createdAt: number
+  finishedAt?: number
+}

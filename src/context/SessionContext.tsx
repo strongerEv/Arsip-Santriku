@@ -19,6 +19,8 @@ interface SessionContextValue {
   start: (pkg: ReadingPackage) => void
   /** Tambah hitungan bacaan yang sedang berjalan. */
   addCount: (delta?: number) => void
+  /** Tambah hitungan ke statistik global saja (dipakai Program Cinta Shalawat). */
+  bumpTaps: (delta: number) => void
   /** Kembalikan hitungan bacaan sekarang ke nol. */
   resetCount: () => void
   /** Simpan hasil bacaan sekarang lalu pindah ke indeks berikutnya. */
@@ -100,6 +102,11 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     if (delta > 0) setStats((prev) => ({ ...prev, totalTaps: prev.totalTaps + delta }))
   }, [])
 
+  const bumpTaps = useCallback<SessionContextValue['bumpTaps']>((delta) => {
+    if (delta <= 0) return
+    setStats((prev) => ({ ...prev, totalTaps: prev.totalTaps + delta }))
+  }, [])
+
   const resetCount = useCallback(() => {
     setSession((prev) => (prev ? { ...prev, count: 0, updatedAt: Date.now() } : prev))
   }, [])
@@ -158,6 +165,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       stats,
       start,
       addCount,
+      bumpTaps,
       resetCount,
       advanceTo,
       jumpTo,
@@ -165,7 +173,19 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       abandon,
       clearHistory,
     }),
-    [session, stats, start, addCount, resetCount, advanceTo, jumpTo, finish, abandon, clearHistory],
+    [
+      session,
+      stats,
+      start,
+      addCount,
+      bumpTaps,
+      resetCount,
+      advanceTo,
+      jumpTo,
+      finish,
+      abandon,
+      clearHistory,
+    ],
   )
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>

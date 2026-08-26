@@ -34,6 +34,14 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 - Layar dijaga tetap menyala selama sesi (Screen Wake Lock).
 - Layar "Istighosah Selesai" berisi ringkasan hitungan, jumlah bacaan, dan durasi.
 
+### Program Cinta Shalawat
+- Susun target sholawat sendiri: **berapa jumlahnya** (mis. 10.000) **dalam berapa hari** (mis. 30) — keduanya bebas diatur, lengkap dengan preset cepat.
+- **Target harian dihitung otomatis** dan bisa menyesuaikan sendiri: sisa bacaan dibagi sisa hari, sehingga ketika sempat tertinggal targetnya ikut menyesuaikan.
+- Pilih teks sholawat (Jibril, Pendek, Ibrahimiyah, Nariyah, Munjiyat) atau tulis teks sendiri.
+- Layar baca dengan **tasbih digital** — hitungan langsung tercatat pada tanggal hari ini, dengan getar penanda saat target harian tercapai.
+- Pantau progres: cincin persentase total, capaian hari ini, hari berjalan, rentetan hari berturut-turut, rata-rata harian, perkiraan tanggal selesai, dan grafik 14 hari terakhir.
+- Program yang diakhiri tersimpan sebagai riwayat.
+
 ### Pendukung
 - **Mode offline** — service worker mem-precache seluruh aplikasi dan bacaan; data tersimpan di perangkat.
 - **Statistik personal** — total hitungan tasbih, jumlah khatam, jumlah sesi, total waktu berdzikir, riwayat sesi.
@@ -61,10 +69,10 @@ npm run typecheck # pemeriksaan tipe
 ```
 src/
 ├─ components/   # Card bacaan, activity ring tasbih, sheet, tab bar, ikon
-├─ context/      # Settings, Library (arsip), Session (sesi & statistik), Toast
-├─ data/         # Paket istighosah, arsip bawaan, kategori
-├─ lib/          # Penyimpanan lokal, haptic, wake lock, deteksi goyang, share
-├─ pages/        # Beranda, Arsip, Istighosah, Sesi, Statistik, Pengaturan
+├─ context/      # Settings, Library (arsip), Session (sesi & statistik), Sholawat, Toast
+├─ data/         # Paket istighosah, arsip bawaan, kategori, teks sholawat
+├─ lib/          # Penyimpanan lokal, haptic, wake lock, deteksi goyang, share, hitungan program
+├─ pages/        # Beranda, Arsip, Istighosah, Sesi, Cinta Shalawat, Statistik, Pengaturan
 ├─ styles/       # Design token, base, komponen, mode sesi
 └─ types.ts
 ```
@@ -73,8 +81,9 @@ src/
 
 - Seluruh data disimpan di `localStorage` perangkat — tidak ada server, tidak ada akun.
 - Getar (Vibration API) tidak didukung Safari iOS; ketukan tetap berfungsi normal.
-- Aplikasi web tidak diizinkan mengubah pengaturan sistem. Tombol Mode Pesawat mencoba
-  membuka halaman pengaturan lewat intent Android; di platform lain ditampilkan panduan manual.
+- Aplikasi web tidak diizinkan mengubah pengaturan sistem. Tombol "Aktifkan Mode Pesawat Sekarang"
+  mencoba membuka halaman pengaturan lewat intent Android, lalu **selalu** lanjut ke langkah panduan
+  manual — jadi tombolnya tetap membawa maju di perangkat mana pun.
 - Font Arab memakai Amiri / Scheherazade New dari Google Fonts dengan fallback font sistem,
   dan di-cache agar tetap tampil saat offline.
 

@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   background: var(--bg);
-  padding: calc(var(--safe-top) + 10px) 16px calc(var(--safe-bottom) + 14px);
+  padding: calc(var(--safe-top) + 16px) 16px calc(var(--safe-bottom) + 14px);
 }
 
 .session__topbar {
@@ -80,7 +80,6 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 18px;
   min-height: 0;
   overflow-y: auto;
@@ -88,6 +87,23 @@
   width: 100%;
   max-width: var(--page-max);
   margin: 0 auto;
+}
+
+/*
+ * Isi dipusatkan lewat auto-margin, bukan `justify-content: center`:
+ * saat kartu lebih tinggi dari layar, auto-margin menyusut jadi nol sehingga
+ * bagian atas kartu tidak ikut terpotong saat digulir.
+ */
+.session__body > :first-child {
+  margin-top: auto;
+}
+
+.session__body > :last-child {
+  margin-bottom: auto;
+}
+
+.session__body > * {
+  flex: none;
 }
 
 .session__counter-area {

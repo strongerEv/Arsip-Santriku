@@ -1,13 +1,18 @@
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useSession } from '../context/SessionContext'
+import { useSholawat } from '../context/SholawatContext'
+import { computeProgress, dateKey } from '../lib/program'
 import { useToast } from '../context/ToastContext'
 import { formatDateTime, formatDuration, formatNumber } from '../lib/format'
 import { Sheet } from '../components/Sheet'
-import { IconCheckCircle, IconClock, IconFlame } from '../components/Icons'
+import { IconCheckCircle, IconChevronLeft, IconClock, IconFlame, IconHeart } from '../components/Icons'
 import { EmptyState, PageHeader } from '../components/ui'
 
 export function StatistikPage() {
   const { stats, clearHistory } = useSession()
+  const { program } = useSholawat()
+  const navigate = useNavigate()
   const toast = useToast()
   const [confirm, setConfirm] = useState(false)
 
@@ -19,6 +24,13 @@ export function StatistikPage() {
 
   return (
     <main className="page page-enter">
+      <div className="row" style={{ marginBottom: 14 }}>
+        <button type="button" className="icon-btn" onClick={() => navigate(-1)} aria-label="Kembali">
+          <IconChevronLeft />
+        </button>
+        <span className="spacer" />
+      </div>
+
       <PageHeader title="Statistik" subtitle="Riwayat ibadahmu — untuk menjaga istiqamah." />
 
       <div className="stat-grid">
@@ -41,6 +53,34 @@ export function StatistikPage() {
           <p className="stat-card__label">Total waktu berdzikir</p>
         </div>
       </div>
+
+      {program && (() => {
+        const p = computeProgress(program, dateKey())
+        return (
+          <>
+            <h2 className="section-title">Program Cinta Shalawat</h2>
+            <div className="card">
+              <div className="row">
+                <span className="list-row__icon">
+                  <IconHeart />
+                </span>
+                <span className="list-row__label">
+                  <span className="card__title" style={{ display: 'block', fontSize: 15 }}>
+                    {program.name}
+                  </span>
+                  <span className="card__meta">
+                    {formatNumber(p.total)} dari {formatNumber(program.targetTotal)} sholawat
+                  </span>
+                </span>
+                <span className="list-row__value">{Math.round(p.percent)}%</span>
+              </div>
+              <div className="meter" style={{ marginTop: 14 }}>
+                <div className="meter__fill" style={{ width: `${p.percent}%` }} />
+              </div>
+            </div>
+          </>
+        )
+      })()}
 
       <h2 className="section-title">Riwayat sesi</h2>
       {stats.completions.length === 0 ? (

@@ -1,0 +1,199 @@
+/* =========================================================================
+   Program Cinta Shalawat — progress harian, grafik, dan kartu target.
+   ========================================================================= */
+
+.ring--static {
+  cursor: default;
+}
+
+.ring--static:active {
+  transform: none;
+}
+
+/* -- Bilah progress ------------------------------------------------------ */
+
+.meter {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--fill-tertiary);
+  overflow: hidden;
+}
+
+.meter__fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--emerald-400), var(--emerald-600));
+  transition: width 0.5s var(--ease-out);
+}
+
+[data-theme='dark'] .meter__fill {
+  background: linear-gradient(90deg, var(--emerald-500), var(--emerald-300));
+}
+
+.meter--slim {
+  height: 6px;
+}
+
+/* -- Grafik batang harian ------------------------------------------------ */
+
+.daybars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 96px;
+  margin-top: 4px;
+}
+
+.daybar {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 5px;
+  background: var(--fill-quaternary);
+  overflow: hidden;
+}
+
+.daybar__fill {
+  width: 100%;
+  border-radius: 5px;
+  background: var(--accent);
+  min-height: 3px;
+  transition: height 0.45s var(--ease-out);
+}
+
+.daybar--kosong .daybar__fill {
+  background: var(--fill-tertiary);
+}
+
+.daybar--hariini {
+  outline: 2px solid var(--accent-soft-border);
+  outline-offset: 1px;
+}
+
+.daybars__axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+}
+
+/* -- Kartu target hari ini ---------------------------------------------- */
+
+.today-card__angka {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.today-card__count {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -1.4px;
+  line-height: 1;
+}
+
+.today-card__of {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+/* -- Pilihan teks sholawat ---------------------------------------------- */
+
+.pick {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 16px 18px;
+  background: transparent;
+  color: inherit;
+  transition: background-color 0.2s var(--ease-out);
+}
+
+.pick + .pick {
+  border-top: 1px solid var(--separator);
+}
+
+.pick.is-active {
+  background: var(--accent-soft);
+}
+
+.pick__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pick__radio {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--separator-strong);
+  display: grid;
+  place-items: center;
+  transition: border-color 0.2s var(--ease-out);
+}
+
+.pick.is-active .pick__radio {
+  border-color: var(--accent);
+}
+
+.pick.is-active .pick__radio::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.pick__name {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.pick__arabic {
+  font-family: var(--font-arabic);
+  direction: rtl;
+  text-align: right;
+  font-size: 21px;
+  line-height: 1.95;
+  margin-top: 10px;
+  color: var(--text-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* -- Chip preset angka --------------------------------------------------- */
+
+.preset-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* -- Ringkasan program di halaman setup ---------------------------------- */
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14.5px;
+  padding: 9px 0;
+}
+
+.summary-line + .summary-line {
+  border-top: 1px solid var(--separator);
+}
+
+.summary-line__value {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}

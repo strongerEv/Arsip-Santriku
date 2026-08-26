@@ -68,6 +68,8 @@
   /* -- Layout -- */
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+  /* Jarak atas halaman: selalu ada ruang napas walau perangkat melaporkan inset 0. */
+  --page-top: calc(var(--safe-top) + 24px);
   --tabbar-height: 68px;
   --page-max: 720px;
 }
