@@ -173,11 +173,11 @@ export const ISTIGHOSAH_ANNAJAH: ReadingPackage = {
       counted: true,
       target: 7,
       arabic:
-        'اَللَّهُمَّ يَسِّرْ أُمُوْرَنَا كُلَّهَا وَسَهِّلْ أُمُوْرَنَا كُلَّهَا وَلَا تُعَسِّرْ عَلَيْنَا شَيْئًا مِنْهَا يَا رَبَّ الْعَالَمِيْنَ',
+        'اَللَّهُمَّ يَسِّرْ أُمُوْرَنَا كُلَّهَا وَسَهِّلْ أُمُوْرَنَا كُلَّهَا وَلَا تُعَسِّرْ عَلَيْنَا',
       latin:
-        'Allāhumma yassir umūranā kullahā wa sahhil umūranā kullahā wa lā tu‘assir ‘alainā syai’an minhā yā Rabbal-‘ālamīn',
+        'Allāhumma yassir umūranā kullahā wa sahhil umūranā kullahā wa lā tu‘assir ‘alainā',
       translation:
-        'Ya Allah, mudahkanlah seluruh urusan kami, lancarkanlah semuanya, dan jangan Engkau persulit sedikit pun bagi kami, wahai Tuhan semesta alam.',
+        'Ya Allah, mudahkanlah seluruh urusan kami, lancarkanlah semuanya, dan jangan Engkau persulit atas kami.',
     },
     {
       id: 'annajah-16',
