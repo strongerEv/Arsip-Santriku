@@ -149,6 +149,16 @@ export function PengaturanPage() {
           }
         />
         <ListRow
+          label="Hitung dengan tombol volume & keyboard"
+          trailing={
+            <Switch
+              label="Hitung dengan tombol volume dan keyboard"
+              checked={settings.keyCount}
+              onChange={(v) => update('keyCount', v)}
+            />
+          }
+        />
+        <ListRow
           label="Layar tetap menyala selama sesi"
           trailing={
             <Switch
@@ -170,7 +180,9 @@ export function PengaturanPage() {
         />
       </div>
       <p className="muted-note" style={{ margin: '10px 4px 0' }}>
-        Selama sesi berlangsung, notifikasi dari dalam aplikasi ini otomatis dibisukan.
+        Selama sesi berlangsung, notifikasi dari dalam aplikasi ini otomatis dibisukan. Tombol
+        volume yang terbaca hanya yang berasal dari perangkat Bluetooth (mis. tombol rana) dan
+        keyboard — tombol volume bawaan HP ditangani sistem sehingga tidak sampai ke aplikasi.
       </p>
 
       <h2 className="section-title">Data</h2>

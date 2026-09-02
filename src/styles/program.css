@@ -197,3 +197,28 @@
   font-variant-numeric: tabular-nums;
   text-align: right;
 }
+
+/* -- Halaman tasbih berdiri sendiri -------------------------------------- */
+
+.tasbih-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 26px 16px 22px;
+  border-radius: var(--radius-xl);
+  background: var(--card);
+  box-shadow: var(--shadow-raised);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.16s var(--ease-out);
+}
+
+.tasbih-area:active {
+  transform: scale(0.99);
+}
+
+.tasbih-area .ring__glow {
+  fill: var(--card-2);
+}

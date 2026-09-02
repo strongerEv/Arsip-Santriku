@@ -10,6 +10,7 @@ import { haptic } from '../lib/haptics'
 import { setFocusMode } from '../lib/focusMode'
 import { useWakeLock } from '../lib/useWakeLock'
 import { useShake } from '../lib/useShake'
+import { useKeyCounter } from '../lib/useKeyCounter'
 import { useRingSize } from '../lib/useRingSize'
 import { TasbihRing } from '../components/TasbihRing'
 import { IconCheck, IconClose, IconMinus } from '../components/Icons'
@@ -42,6 +43,7 @@ export function SholawatBacaPage() {
   }, [addCount, bumpTaps])
 
   useShake(aktif && settings.shakeToCount, onTap)
+  useKeyCounter(aktif && settings.keyCount, onTap)
 
   const progress = program ? computeProgress(program, dateKey()) : null
 

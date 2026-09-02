@@ -8,6 +8,7 @@ import { haptic } from '../lib/haptics'
 import { setFocusMode } from '../lib/focusMode'
 import { useWakeLock } from '../lib/useWakeLock'
 import { useShake } from '../lib/useShake'
+import { useKeyCounter } from '../lib/useKeyCounter'
 import { useRingSize } from '../lib/useRingSize'
 import { formatDuration, formatNumber } from '../lib/format'
 import { ReadingCard } from '../components/ReadingCard'
@@ -104,6 +105,7 @@ export function SesiPage() {
   }, [addCount])
 
   useShake(active && settings.shakeToCount && Boolean(reading?.counted), onTap)
+  useKeyCounter(active && settings.keyCount && Boolean(reading?.counted), onTap)
 
   // Tiap ganti bacaan, kembalikan gulir ke awal teks.
   useEffect(() => {

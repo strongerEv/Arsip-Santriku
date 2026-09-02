@@ -17,6 +17,7 @@ const DEFAULTS: Settings = {
   arabicLeading: 2.15,
   haptics: true,
   shakeToCount: false,
+  keyCount: true,
   keepAwake: true,
   showLatin: true,
   showTranslation: true,

@@ -103,6 +103,7 @@ export interface Settings {
   arabicLeading: number
   haptics: boolean
   shakeToCount: boolean
+  keyCount: boolean
   keepAwake: boolean
   showLatin: boolean
   showTranslation: boolean

@@ -64,6 +64,7 @@ export function TasbihRing({ count, target, onTap, size = 236, disabled }: Tasbi
           strokeWidth={stroke}
           strokeDasharray={circumference}
           strokeDashoffset={offset}
+          strokeOpacity={ratio === 0 ? 0 : 1}
         />
       </svg>
       <span className="ring__content">

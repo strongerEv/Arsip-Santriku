@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom'
-import { IconArchive, IconBeads, IconGear, IconHome, IconLayers } from './Icons'
+import { IconArchive, IconBeads, IconGear, IconHome, IconLayers, IconTarget } from './Icons'
 
 const TABS = [
   { to: '/', label: 'Beranda', Icon: IconHome, end: true },
   { to: '/arsip', label: 'Arsip', Icon: IconArchive, end: false },
   { to: '/amalan', label: 'Amalan', Icon: IconBeads, end: false },
+  { to: '/tasbih', label: 'Tasbih', Icon: IconTarget, end: false },
   { to: '/program', label: 'Program', Icon: IconLayers, end: false },
   { to: '/pengaturan', label: 'Pengaturan', Icon: IconGear, end: false },
 ]

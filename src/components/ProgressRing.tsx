@@ -27,6 +27,7 @@ export function ProgressRing({ value, size = 180, strokeRatio = 0.06, children }
           strokeWidth={stroke}
           strokeDasharray={circumference}
           strokeDashoffset={circumference * (1 - ratio)}
+          strokeOpacity={ratio === 0 ? 0 : 1}
         />
       </svg>
       <span className="ring__content">{children}</span>

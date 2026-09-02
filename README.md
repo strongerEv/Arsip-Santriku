@@ -19,13 +19,18 @@ Dibuat mengikuti PRD Aplikasi Arsip Santri untuk Pesma An Najah, dengan palet
 ### Modul B — Bacaan berhitung + tasbih digital
 - Paket bacaan tersusun sebagai playlist berurutan (tab **Amalan**: Istighosah dan Tahlil).
 - Tombol tasbih berbentuk **activity ring** (seperti Apple Watch) dengan angka besar di tengah.
-- Hitungan naik tiap ketukan, atau dengan **menggoyangkan perangkat** (opsional, butuh izin sensor gerak).
+- Hitungan naik tiap ketukan, dengan **menggoyangkan perangkat** (opsional, butuh izin sensor gerak), atau lewat **tombol fisik** — spasi/Enter pada keyboard dan tombol volume dari perangkat Bluetooth seperti tombol rana kamera.
 - **Auto-pindah** ke bacaan berikutnya saat target tercapai, dengan transisi halus + getar penanda.
 - **Tasbih mengambang**: teks Arab memakai seluruh tinggi layar, tasbih menempel di bawah dan selalu terlihat — jadi bisa membaca sambil menghitung tanpa menggulir. Mengetuk di mana saja pada area teks juga menambah hitungan.
 - Target `null` ("sebanyak-banyaknya") tidak auto-pindah — diakhiri lewat tombol **Selesai**.
 - Reset hitungan per bacaan, kurangi hitungan, maju/mundur antar bacaan.
 - **Lanjutkan sesi**: sesi yang ditinggal tersimpan otomatis dan bisa dilanjutkan dari Beranda.
 - **Buka bacaan langsung**: setiap kartu pada daftar urutan bacaan bisa diketuk untuk langsung membaca bagian itu — misalnya hanya doa penutup tahlil — tanpa harus melewati bacaan sebelumnya. Sesi yang dibuka dengan cara melompat dicatat sebagai "sebagian", bukan khatam.
+
+### Tasbih
+- Tab **Tasbih** berisi penghitung dzikir bebas tanpa teks bacaan: ketuk di mana saja pada area hitung.
+- Target per putaran dapat dipilih (33, 99, 100, 1.000, atau tanpa batas); satu putaran penuh otomatis kembali ke nol dan menambah jumlah putaran.
+- Hitungan, putaran, dan total tersimpan di perangkat sehingga tidak hilang saat aplikasi ditutup, dan ikut menambah total tasbih pada halaman Statistik.
 
 ### Modul C — Mode sesi istighosah
 - Layar fokus penuh tanpa tab bar, teks Arab besar, minim distraksi.
@@ -86,7 +91,7 @@ src/
 ├─ context/      # Settings, Library (arsip), Session (sesi & statistik), Sholawat, Toast
 ├─ data/         # Paket istighosah & tahlil, arsip bawaan, kategori, teks sholawat
 ├─ lib/          # Penyimpanan lokal, haptic, wake lock, deteksi goyang, share, hitungan program
-├─ pages/        # Beranda, Arsip, Amalan, Sesi, Program, Statistik, Pengaturan
+├─ pages/        # Beranda, Arsip, Amalan, Sesi, Tasbih, Program, Statistik, Pengaturan
 ├─ styles/       # Design token, base, komponen, mode sesi
 └─ types.ts
 ```
@@ -95,6 +100,7 @@ src/
 
 - Seluruh data disimpan di `localStorage` perangkat — tidak ada server, tidak ada akun.
 - Getar (Vibration API) tidak didukung Safari iOS; ketukan tetap berfungsi normal.
+- Tombol volume bawaan perangkat tidak dapat dibaca oleh aplikasi web — Android maupun iOS menahannya di tingkat sistem operasi dan tidak meneruskannya ke halaman. Yang sampai ke aplikasi adalah tombol volume dari perangkat Bluetooth (mis. tombol rana kamera, remote presentasi) dan keyboard, dan itulah yang ditangani.
 - Aplikasi web tidak diizinkan mengubah pengaturan sistem, jadi Mode Pesawat diaktifkan sendiri
   oleh santri — pop-up sebelum sesi hanya berperan sebagai pengingat.
 - Font Arab memakai Amiri / Scheherazade New dari Google Fonts dengan fallback font sistem,

@@ -7,6 +7,7 @@ import { ArsipEditorPage } from './pages/ArsipEditorPage'
 import { AmalanPage } from './pages/AmalanPage'
 import { PaketDetailPage } from './pages/PaketDetailPage'
 import { SesiPage } from './pages/SesiPage'
+import { TasbihPage } from './pages/TasbihPage'
 import { ProgramPage } from './pages/ProgramPage'
 import { SholawatPage } from './pages/SholawatPage'
 import { SholawatSetupPage } from './pages/SholawatSetupPage'
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/istighosah" element={<Navigate to="/amalan" replace />} />
         <Route path="/istighosah/:packageId" element={<PaketLamaRedirect />} />
         <Route path="/sesi/:packageId" element={<SesiPage />} />
+        <Route path="/tasbih" element={<TasbihPage />} />
         <Route path="/program" element={<ProgramPage />} />
         <Route path="/program/sholawat" element={<SholawatPage />} />
         <Route path="/program/sholawat/baru" element={<SholawatSetupPage mode="baru" />} />
